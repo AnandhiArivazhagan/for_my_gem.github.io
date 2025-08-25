@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Anniversary Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ff99cc, #ff66cc);
+      padding-top: 100px;
+    }
+    .box {
+      background: rgba(255,255,255,0.9);
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    input, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    button {
+      background: #ff0066;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover { background: #d50000; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Enter Name and Date</h2>
+    <input type="text" id="name" placeholder="Name"><br>
+    <input type="date" id="date"><br>
+    <button onclick="checkDetails()">Proceed</button>
+    <p class="error" id="error"></p>
+  </div>
+
+  <script>
+    function checkDetails() {
+      let name = document.getElementById("name").value.trim();
+      let date = document.getElementById("date").value;
+      let correctName = "Arjun"; // Change to your name
+      let correctDate = "2025-08-13"; // Change to your date
+      if (name === correctName && date === correctDate) {
+        window.location.href = "secondPage.html";
+      } else {
+        document.getElementById("error").textContent = "Wrong name or date!";
+      }
+    }
+  </script>
+</body>
+</html>
