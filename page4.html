@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>arjun's Anandhi</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at center, #2b1055, #000000);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Twinkling stars */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.2; }
+      to { opacity: 1; }
+    }
+
+    /* Floating crystals */
+    .crystal {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: rgba(173,216,230,0.9);
+      transform: rotate(45deg);
+      box-shadow: 0 0 15px rgba(173,216,230,0.8), 0 0 30px #a9c9ff;
+      animation: float 10s linear infinite;
+    }
+    @keyframes float {
+      0%   { transform: translateY(100vh) rotate(45deg) scale(1); opacity: 0; }
+      30%  { opacity: 1; }
+      70%  { opacity: 1; }
+      100% { transform: translateY(-20vh) rotate(405deg) scale(1.2); opacity: 0; }
+    }
+
+    /* Fade in texts */
+    .line {
+      opacity: 0;
+      font-size: 24px;
+      text-align: center;
+      animation: fadeIn 3s forwards;
+    }
+    .line:nth-child(1) { animation-delay: 1s; }
+    .line:nth-child(2) { animation-delay: 4s; }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Glowing names */
+    .names {
+      margin-top: 40px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #a9c9ff;
+      text-shadow: 0 0 10px #a9c9ff, 0 0 20px #6fa3ef, 0 0 30px #b0e0e6;
+      opacity: 0;
+      animation: glow 2s infinite alternate, fadeIn 2s forwards;
+      animation-delay: 7s;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #6fa3ef; }
+      to { text-shadow: 0 0 25px #a9c9ff, 0 0 40px #b0e0e6; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Text Lines -->
+ <div class="line">Our story doesn’t end here…</div> 
+   <div class="line">…it’s just the beginning ❤️</div> 
+   <div class="names">Arjun❤️Anandhi</div>
+
+  <script>
+    // Random stars
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.top = Math.random() * window.innerHeight + "px";
+      star.style.left = Math.random() * window.innerWidth + "px";
+      star.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(star);
+    }
+
+    // Random crystals
+    for (let i = 0; i < 20; i++) {
+      const crystal = document.createElement("div");
+      crystal.className = "crystal";
+      crystal.style.left = Math.random() * window.innerWidth + "px";
+      crystal.style.animationDuration = (Math.random() * 10 + 5) + "s";
+      document.body.appendChild(crystal);
+    }
+  </script>
+</body>
+</html>
