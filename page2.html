@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>arjun's Anandhi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(ellipse at center, #2b1055, #000000);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* mobile frame wrapper */
+    .frame {
+      width: 100%;
+      max-width: 420px;  /* limit desktop */
+      height: 100%;
+      max-height: 850px; /* approximate mobile height */
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 25px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.3);
+    }
+
+    /* Stars background */
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.2; }
+      to { opacity: 1; }
+    }
+
+    /* Shooting star */
+    .shooting-star {
+      position: absolute;
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, white, transparent);
+      opacity: 0.7;
+      transform: rotate(-30deg);
+      animation: shoot 3s linear forwards;
+    }
+
+    @keyframes shoot {
+      0% { transform: translateX(0) translateY(0) rotate(-30deg); opacity: 1; }
+      100% { transform: translateX(-500px) translateY(300px) rotate(-30deg); opacity: 0; }
+    }
+
+    /* Question box */
+    .container {
+      position: relative;
+      width: 90%;           /* mobile friendly width */
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      text-align: center;
+      padding: 30px 20px;
+      z-index: 2;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: #ffb6f9;
+      text-shadow: 0 0 10px rgba(255,182,249,0.9);
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 1rem;
+      margin: 10px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .yes-btn {
+      background: linear-gradient(135deg, #ff4ecd, #ff85b3);
+    }
+    .no-btn {
+      background: linear-gradient(135deg, #ff5858, #fb8d3d);
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255,255,255,0.7);
+    }
+  </style>
+</head>
+<body>
+  <!-- wrapper frame -->
+  <div class="frame">
+    <!-- stars -->
+    <div class="stars"></div>
+
+    <!-- container -->
+    <div class="container">
+      <h2>Kadaisi vara nee en kooda iruppiya? 💖</h2>
+      <button class="yes-btn" onclick="goNext()">YES</button>
+      <button class="no-btn" onclick="alert('😢 Seri... but still I will always love you!')">NO</button>
+    </div>
+  </div>
+
+  <script>
+    // create random stars
+    const starsContainer = document.querySelector('.stars');
+    for (let i = 0; i < 120; i++) {
+      let star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = Math.random() * 100 + '%';
+      star.style.left = Math.random() * 100 + '%';
+      let size = Math.random() * 2 + 1;
+      star.style.width = star.style.height = size + 'px';
+      star.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+      starsContainer.appendChild(star);
+    }
+
+    // shooting star
+    function createShootingStar() {
+      let shootingStar = document.createElement('div');
+      shootingStar.classList.add('shooting-star');
+      shootingStar.style.top = Math.random() * 50 + 'vh';
+      shootingStar.style.left = "100%";
+      document.querySelector('.frame').appendChild(shootingStar);
+      setTimeout(() => shootingStar.remove(), 3000);
+    }
+    setInterval(createShootingStar, 5000);
+
+    // YES -> go next page
+    function goNext() {
+      window.location.href = "page3.html";
+    }
+  </script>
+</body>
+</html>
