@@ -1,57 +1,191 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Anniversary Login</title>
+  <title>arjun's Anandhi</title>
+  
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, #ff99cc, #ff66cc);
-      padding-top: 100px;
-    }
-    .box {
-      background: rgba(255,255,255,0.9);
-      padding: 30px;
-      border-radius: 10px;
-      display: inline-block;
-    }
-    input, button {
-      margin: 10px;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-    }
-    button {
-      background: #ff0066;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ececec; /* Outside mobile bg */
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
       color: white;
-      border: none;
-      cursor: pointer;
     }
-    button:hover { background: #d50000; }
-    .error { color: red; }
+
+    /* ------- MOBILE FRAME ------- */
+    .mobile-frame {
+      width: 360px;   /* typical mobile width */
+      height: 640px;  /* typical mobile height */
+      border: 12px solid #000; 
+      border-radius: 30px;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #0b0f29, #1a1f4b, #2c2f6b);
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      position: relative;
+    }
+
+    /* Content inside phone */
+    .content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;  /* horizontal center */
+      align-items: center;      /* vertical center */
+      flex-direction: column;   /* stack elements */
+      overflow: hidden;
+    }
+
+    /* Stars background */
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.2; }
+      to { opacity: 1; }
+    }
+
+    /* Shooting star */
+    .shooting-star {
+      position: absolute;
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, white, transparent);
+      opacity: 0.7;
+      transform: rotate(-30deg);
+      animation: shoot 3s linear forwards;
+    }
+
+    @keyframes shoot {
+      0% { transform: translateX(0) translateY(0) rotate(-30deg); opacity: 1; }
+      100% { transform: translateX(-500px) translateY(300px) rotate(-30deg); opacity: 0; }
+    }
+
+    /* Container (Form Box) */
+    .container {
+      position: relative;
+      width: 90%;
+      max-width: 320px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      text-align: center;
+      padding: 20px 15px;
+      z-index: 2;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #ffb6f9;
+      text-shadow: 0 0 10px rgba(255,182,249,0.9);
+    }
+
+    input {
+      padding: 10px;
+      font-size: 14px;
+      margin: 8px 0;
+      border-radius: 10px;
+      border: none;
+      width: 80%;
+      outline: none;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #4ecbff, #7b7bff);
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(255,255,255,0.7);
+    }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h2>Enter Name and Date</h2>
-    <input type="text" id="name" placeholder="Name"><br>
-    <input type="date" id="date"><br>
-    <button onclick="checkDetails()">Proceed</button>
-    <p class="error" id="error"></p>
+  
+  <!-- Mobile Frame -->
+  <div class="mobile-frame">
+    <div class="content">
+      <!-- Stars -->
+      <div class="stars"></div>
+
+      <!-- Container -->
+      <div class="container">
+        <h1>💖 Enter Your Name & Date 💖</h1>
+        <input type="text" id="name" placeholder="Enter Your Name"><br>
+        <input type="date" id="date"><br>
+        <button onclick="validate()">Continue</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    function checkDetails() {
-      let name = document.getElementById("name").value.trim();
-      let date = document.getElementById("date").value;
-      let correctName = "Arjun"; // Change to your name
-      let correctDate = "2025-08-13"; // Change to your date
-      if (name === correctName && date === correctDate) {
-        window.location.href = "page5.html";
+    // create random stars
+    const starsContainer = document.querySelector('.stars');
+    for (let i = 0; i < 120; i++) {
+      let star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = Math.random() * 100 + '%';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.width = star.style.height = Math.random() * 3 + 'px';
+      star.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+      starsContainer.appendChild(star);
+    }
+
+    // shooting star every few seconds
+    function createShootingStar() {
+      let shootingStar = document.createElement('div');
+      shootingStar.classList.add('shooting-star');
+      shootingStar.style.top = Math.random() * 50 + 'vh';
+      shootingStar.style.left = 100 + '%';
+      document.querySelector('.mobile-frame').appendChild(shootingStar);
+      setTimeout(() => shootingStar.remove(), 3000);
+    }
+    setInterval(createShootingStar, 5000);
+
+    // validation
+    function validate() {
+      const name = document.getElementById("name").value.trim();
+      const date = document.getElementById("date").value;
+      if (name && date) {
+        localStorage.setItem("loverName", name);
+        localStorage.setItem("loverDate", date);
+        window.location.href = "page2.html";
       } else {
-        document.getElementById("error").textContent = "Wrong name or date!";
+        alert("🥺 Please enter both Name and Date!");
       }
     }
   </script>
