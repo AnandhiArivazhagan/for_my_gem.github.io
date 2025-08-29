@@ -2,52 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Important line -->
   <title>arjun's Anandhi</title>
   
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #ececec; /* Outside mobile bg */
+      background: linear-gradient(to bottom, #0b0f29, #1a1f4b, #2c2f6b);
       font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
       color: white;
     }
 
-    /* ------- MOBILE FRAME ------- */
-    .mobile-frame {
-      width: 360px;   /* typical mobile width */
-      height: 640px;  /* typical mobile height */
-      border: 12px solid #000; 
-      border-radius: 30px;
-      overflow: hidden;
-      background: linear-gradient(to bottom, #0b0f29, #1a1f4b, #2c2f6b);
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      position: relative;
-    }
-
-    /* Content inside phone */
-    .content {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;  /* horizontal center */
-      align-items: center;      /* vertical center */
-      flex-direction: column;   /* stack elements */
-      overflow: hidden;
-    }
-
     /* Stars background */
     .stars {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: transparent;
       z-index: 0;
     }
 
@@ -82,31 +65,31 @@
       100% { transform: translateX(-500px) translateY(300px) rotate(-30deg); opacity: 0; }
     }
 
-    /* Container (Form Box) */
+    /* Container */
     .container {
       position: relative;
       width: 90%;
-      max-width: 320px;
+      max-width: 420px;
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(8px);
       border-radius: 20px;
       text-align: center;
-      padding: 20px 15px;
+      padding: 30px 20px;
       z-index: 2;
       box-shadow: 0 8px 25px rgba(0,0,0,0.5);
     }
 
     h1 {
-      font-size: 22px;
-      margin-bottom: 15px;
+      font-size: 24px;
+      margin-bottom: 20px;
       color: #ffb6f9;
       text-shadow: 0 0 10px rgba(255,182,249,0.9);
     }
 
     input {
-      padding: 10px;
-      font-size: 14px;
-      margin: 8px 0;
+      padding: 12px;
+      font-size: 16px;
+      margin: 10px 0;
       border-radius: 10px;
       border: none;
       width: 80%;
@@ -115,9 +98,9 @@
     }
 
     button {
-      padding: 12px 24px;
-      font-size: 16px;
-      margin-top: 15px;
+      padding: 14px 28px;
+      font-size: 18px;
+      margin-top: 20px;
       border: none;
       border-radius: 12px;
       cursor: pointer;
@@ -135,21 +118,15 @@
   </style>
 </head>
 <body>
-  
-  <!-- Mobile Frame -->
-  <div class="mobile-frame">
-    <div class="content">
-      <!-- Stars -->
-      <div class="stars"></div>
+  <!-- Stars -->
+  <div class="stars"></div>
 
-      <!-- Container -->
-      <div class="container">
-        <h1>💖 Enter Your Name & Date 💖</h1>
-        <input type="text" id="name" placeholder="Enter Your Name"><br>
-        <input type="date" id="date"><br>
-        <button onclick="validate()">Continue</button>
-      </div>
-    </div>
+  <!-- Container -->
+  <div class="container">
+    <h1>💖 Enter Your Name & Date 💖</h1>
+    <input type="text" id="name" placeholder="Enter Your Name"><br>
+    <input type="date" id="date"><br>
+    <button onclick="validate()">Continue</button>
   </div>
 
   <script>
@@ -170,8 +147,8 @@
       let shootingStar = document.createElement('div');
       shootingStar.classList.add('shooting-star');
       shootingStar.style.top = Math.random() * 50 + 'vh';
-      shootingStar.style.left = 100 + '%';
-      document.querySelector('.mobile-frame').appendChild(shootingStar);
+      shootingStar.style.left = '100%';
+      document.body.appendChild(shootingStar);
       setTimeout(() => shootingStar.remove(), 3000);
     }
     setInterval(createShootingStar, 5000);
@@ -191,5 +168,6 @@
   </script>
 </body>
 </html>
+
 
 
